@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit To-Do Item
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <h1>Edit To-Do Item</h1>
+    <!-- Update the action URL to use 'id' instead of 'index' -->
+    <form action="{{ url_for('edit', id=todo.id) }}" method="post">
+      <div class="form-group">
+        <label for="todo">Task</label>
+        <!-- Directly use 'todo.task' to populate the value -->
+        <input type="text" class="form-control" id="todo" name="todo" value="{{ todo.task }}">
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <a href="{{ url_for('manage') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
