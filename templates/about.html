@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+About Us
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">About Us</h1>
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <img src="{{ url_for('static', filename='images/about_us.jpg') }}" class="img-fluid rounded" alt="About Us">
+        </div>
+        <div class="col-lg-6">
+            <h2>Our Mission</h2>
+            <p>
+                The mission of ToDoListApp is to help individuals and teams stay organized, productive, and focused on their daily tasks. Our user-friendly platform enables users to easily manage their to-do lists, set priorities, and track their progress.
+            </p>
+            <h2>Features</h2>
+            <ul>
+                <li>Easy to use interface for managing tasks</li>
+                <li>Options to add, edit, and delete tasks</li>
+                <li>Functionality to mark tasks as completed</li>
+                <li>Accessible from anywhere, on any device</li>
+            </ul>
+            <h2>Meet the Team</h2>
+            <p>
+                ToDoListApp was created by a dedicated team of developers and designers committed to improving productivity tools. Our team is passionate about creating solutions that help people streamline their workflow and achieve their goals.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
