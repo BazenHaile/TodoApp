@@ -25,6 +25,13 @@ class ContactSubmission(db.Model):
     email = db.Column(db.String(100), nullable=False)
     message = db.Column(db.Text, nullable=False)
 
+# Initialize the database
+def setup_database(app):
+    with app.app_context():
+        db.create_all()
+
+setup_database(app)
+
 
 # The home and manage routes need to query the database for todos
 @app.route('/')
@@ -97,7 +104,5 @@ def submit_contact_form():
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True, port=5001)
 
