@@ -30,14 +30,30 @@ A simple yet powerful to-do list web application designed to help users manage t
 - Learn More (About Us): Provides detailed background information about the app and its creators.
 - Reach Out (Contact Us): Includes a contact form with validation, improving engagement and support.
 
+## Database and Application Initialization
+
+To ensure that your PostgreSQL tables are set up correctly, the application now includes an initialization function that is run at import time. This ensures that when the application is started by a WSGI server like Gunicorn, the database tables are created properly.
+
+It is critical to set the `DATABASE_URL` environment variable correctly in your Render service's settings. This environment variable should be the internal PostgreSQL database URL provided by Render and not a localhost string.
+
 ## Deployment on Render
 
 ### Pre-Deployment Checklist
 
 - Ensured code is managed in a GitHub repository.
 - Included a `requirements.txt` for Python package management.
-- Utilized a `.gitignore` to maintain repository cleanliness.
 - Synchronized the local and GitHub repositories.
+- Set the `DATABASE_URL` environment variable in the Render service settings to match the PostgreSQL database provided by Render.
+
+### PostgreSQL Database on Render
+
+- The PostgreSQL database for the application has been provisioned on Render with the following settings:
+  - **Name**: `postgresqldb`
+  - **Version**: PostgreSQL 16
+  - **Region**: Frankfurt (EU Central)
+  - **Plan**: Starter (Free Tier with 1GB storage)
+
+Before deploying, make sure that the tables are created by running the application locally or using a migration tool to set up the database schema on Render.
 
 ### Render Configuration
 
@@ -45,24 +61,27 @@ A simple yet powerful to-do list web application designed to help users manage t
 - Region: Europe
 - Runtime: Python3
 - Build Command: Auto-detected (`pip install -r requirements.txt`)
-- Start Command: `gunicorn -w 4 -b :$PORT app:app`
+- Start Command: `gunicorn -w 4 app:app`
+- Environment: Set the `DATABASE_URL` to the PostgreSQL database, Internal PostgreSQL Database URL provided by Render. This is done in the service's environment variables section.
 
 ### Deployment Steps
 
 1. Created a new web service on Render and connected the GitHub account.
 2. Selected the TodoApp repository and configured the service settings.
-3. Initiated deployment and monitored the process via Render's dashboard.
-4. Confirmed the application was live and operational at `https://todoapp-p94g.onrender.com`.
+3. Added the necessary environment variables, including `DATABASE_URL`.
+4. Initiated deployment and monitored the process via Render's dashboard.
+5. Confirmed the application was live and operational at the provided Render subdomain.
 
 ## Getting Started
 
 To run the TodoApp locally, follow these steps:
 
-1. Clone the repository: `git clone [repository URL]`
+1. Clone the repository: `git clone https://github.com/BazenHaile/TodoApp.git`
 2. Navigate to the project directory: `cd TodoApp`
 3. Install dependencies: `pip install -r requirements.txt`
-4. Set environment variables: `export FLASK_APP=app` and `export FLASK_ENV=development`
-5. Initialize the database: `flask db upgrade`
-6. Run the application: `flask run`
+4. Set environment variables: `export DATABASE_URL=your_database_uri` replacing `your_database_uri` with your local or cloud PostgreSQL database URI.
+5. Start the application: `python app.py`
 
-Open a web browser and navigate to `http://127.0.0.1:5000/` or `http://127.0.0.1:5001/` to start managing your tasks with TodoApp.
+Open a web browser and navigate to `http://127.0.0.1:5001/` to start managing your tasks with TodoApp.
+
+Replace `your_database_uri` with the actual URI of your PostgreSQL database when running the app locally. For the database URI format, refer to the information provided in your Render PostgreSQL settings. Do not include sensitive information, such as your database URI, directly in your code. Use environment variables to manage sensitive data.
