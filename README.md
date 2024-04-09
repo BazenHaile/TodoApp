@@ -11,6 +11,10 @@ A simple yet powerful to-do list web application designed to help users manage t
 - Interactive UI: Engage with tasks through a user-friendly web interface.
 - Data Persistence: Tasks are stored in a PostgreSQL database, ensuring data is saved between sessions.
 
+## Enhanced User Interaction
+
+- Robust User Engagement and Data Capture: Beyond its core functionality of managing tasks, the application offers a comprehensive platform for users to voice their inquiries, share feedback, and seek support. Utilizing a meticulously designed "Contact Us" interface, each user interaction is securely captured and stored within the PostgreSQL database. This commitment to data integrity ensures no user input is overlooked, allowing for timely and effective responses. More than just enhancing user engagement, this system empowers us to leverage PostgreSQL's powerful querying capabilities. By analyzing the collected data, we can extract meaningful insights, identify trends, and make informed decisions to elevate the overall user experience continuously.
+
 ## Technology Stack
 
 - Backend: Flask, a lightweight WSGI web application framework in Python, offering simplicity and scalability. PostgreSQL is used as the database to store tasks, providing robustness and reliability.
