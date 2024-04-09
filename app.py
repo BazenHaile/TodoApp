@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask import flash, get_flashed_messages
@@ -6,7 +8,7 @@ app = Flask(__name__, template_folder='templates')
 
 # My PostgreSQL configuration
 app.config['SECRET_KEY'] = '1234'  # used to secure sessions and flash messages.
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://flask_Todo_user:password@localhost/flask_Todo'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://flask_Todo_user:password@localhost/flask_Todo')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
